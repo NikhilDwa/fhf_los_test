@@ -14,5 +14,5 @@ class InfoDataLoader(CommonDataLoader):
         self.start_id = self.config_data["start_id"]
 
         self.column_name = info_column_name
-        self.file_path = PathUtils().get_csv_file_path(f"info.csv")
+        self.file_path = PathUtils().get_csv_file_path(f"Info.csv")
         self.csv_data = csv_data

@@ -102,6 +102,8 @@ class CommonDataLoader:
                     fieldnames.append("ID")
                 writer = csv.DictWriter(file, fieldnames=fieldnames)
                 for row in self.csv_data:
+                    if row["USE_CASE"] == "":
+                        continue
                     filtered_row = {}
                     for key in self.column_name:
                         if key in row and key not in self.config_data:
@@ -118,9 +120,9 @@ class CommonDataLoader:
                         else:
                             filtered_row[key] = ""
                     filtered_row = self.process_csv_data(filtered_row)
-                    if "collateral" in self.file_path.stem:
+                    if "Collateral" in self.file_path.stem:
                         filtered_row = self.update_collateral_dict(filtered_row)
-                    if "info" in self.file_path.stem:
+                    if "Info" in self.file_path.stem:
                         filtered_row = self.update_info_dict(filtered_row)
                     writer.writerow(filtered_row)
             self.logger.info(f"CSV file has been written to {self.file_path}")
