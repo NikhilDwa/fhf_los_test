@@ -46,3 +46,7 @@ class PathUtils:
         temp_directory = cls().__base_path.joinpath("temp/csv_files")
 
         return temp_directory.joinpath(filename)
+
+    @classmethod
+    def get_temp_folder(cls) -> Path:
+        return cls().__base_path.joinpath("temp")

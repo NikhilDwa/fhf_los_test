@@ -14,5 +14,5 @@ class StructureDataLoader(CommonDataLoader):
         self.start_id = self.config_data["start_id"]
 
         self.column_name = structure_column_name
-        self.file_path = PathUtils().get_csv_file_path(f"structure_data.csv")
+        self.file_path = PathUtils().get_csv_file_path(f"structure.csv")
         self.csv_data = csv_data

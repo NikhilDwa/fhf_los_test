@@ -14,5 +14,5 @@ class ApplicantDataLoader(CommonDataLoader):
         self.start_id = self.config_data["start_id"]
 
         self.column_name = applicant_column_name
-        self.file_path = PathUtils().get_csv_file_path(f"applicant_data.csv")
+        self.file_path = PathUtils().get_csv_file_path(f"applicant.csv")
         self.csv_data = csv_data

@@ -22,7 +22,9 @@ class CommonDataLoader:
             with open(self.file_path, "w", newline="") as file:
                 writer = csv.writer(file)
                 json_index = self.column_name.index("JSON")
-                first_row = self.column_name[: json_index + 1]
+                first_row = self.column_name[: json_index + 1] + [""] * (
+                    len(self.column_name) - json_index - 2
+                )
                 writer.writerow(first_row)
                 second_row = [""] * json_index + self.column_name[json_index + 1 :]
                 writer.writerow(second_row)
@@ -36,6 +38,15 @@ class CommonDataLoader:
             del row_data["JSON"]
         row_data["ID"] = self.start_id
         self.start_id += 1
+        return row_data
+
+    def update_collateral_dict(self, row_data):
+        self.logger.info(f"inside update_collateral_dict method..........row_data")
+        row_data["YEAR"] = row_data["VEHICLE_YEAR"]
+        if "Truck" in row_data["USE_CASE"]:
+            row_data["VEHICLE_MAKE_TYPE"] = "Truck"
+        else:
+            row_data["VEHICLE_MAKE_TYPE"] = "Sedan"
         return row_data
 
     def update_info_dict(self, row_data):
@@ -53,16 +64,17 @@ class CommonDataLoader:
 
         self.count += 1
         row_data["TEST_NAME"] = row_data["USE_CASE"]
-
         split_use_case = row_data["USE_CASE"].split("_")
-        if "<600" in split_use_case:
-            row_data["FICO_SCORE_KEY"] = 6
-        elif "550-600" in row_data["USE_CASE"]:
-            row_data["FICO_SCORE_KEY"] = 7
-        elif "700" in row_data["USE_CASE"]:
+        if "700" in row_data["USE_CASE"]:
             row_data["FICO_SCORE_KEY"] = 1
         elif "600" in split_use_case:
             row_data["FICO_SCORE_KEY"] = 2
+        elif "<550" in split_use_case:
+            row_data["FICO_SCORE_KEY"] = 7
+        elif "<600" in split_use_case:
+            row_data["FICO_SCORE_KEY"] = 6
+        elif "550-600" in row_data["USE_CASE"]:
+            row_data["FICO_SCORE_KEY"] = 6
         elif split_use_case[-1] == "None":
             row_data["FICO_SCORE_KEY"] = 8
         elif split_use_case[-2] == "None" and split_use_case[-1] != "None":
@@ -79,7 +91,6 @@ class CommonDataLoader:
             row_data["GOOD_CREDIT_CUSTOMER"] = "Short Term Bureau"
         else:
             row_data["GOOD_CREDIT_CUSTOMER"] = "NA"
-
         return row_data
 
     def write_to_csv(self):
@@ -107,6 +118,8 @@ class CommonDataLoader:
                         else:
                             filtered_row[key] = ""
                     filtered_row = self.process_csv_data(filtered_row)
+                    if "collateral" in self.file_path.stem:
+                        filtered_row = self.update_collateral_dict(filtered_row)
                     if "info" in self.file_path.stem:
                         filtered_row = self.update_info_dict(filtered_row)
                     writer.writerow(filtered_row)
