@@ -18,8 +18,10 @@ def merge_csv_file_to_one():
     config_data: dict = config["INFO_INPUT"]
 
     csv_files_path = "/Users/nikhil/Documents/Leapfrog/los-test/temp/csv_files/*.csv"
-    today_date = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_file_name = f"{config_data['REGISTRATION_STATE']}_{config_data['APPLICATION_TIN_TYPE']}_{today_date}.xlsx"
+    today_date = datetime.now().strftime("%Y%m%d_%H%M%S%f")
+    output_file_name = f"{config_data['REGISTRATION_STATE']}_{config_data['APPLICATION_TIN_TYPE']}_{today_date}.xlsx".replace(
+        " ", "_"
+    ).lower()
     output_excel_file = PathUtils().get_temp_folder().joinpath(output_file_name)
 
     csv_files = glob.glob(csv_files_path)
@@ -34,7 +36,7 @@ def merge_csv_file_to_one():
 
 
 def main():
-    user_input = input("Have to updated config data? (Y/N)")
+    user_input = input("Have to updated the config variable? (Y/N)")
     if user_input == "Y" or user_input == "y":
         all_csv_data = LosDataExtractor().get_csv_file_content()
         applicant_data_loader.ApplicantDataLoader(all_csv_data).execute_data_loading()

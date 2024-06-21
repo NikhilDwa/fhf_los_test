@@ -120,9 +120,9 @@ class CommonDataLoader:
                         else:
                             filtered_row[key] = ""
                     filtered_row = self.process_csv_data(filtered_row)
-                    if "Collateral" in self.file_path.stem:
+                    if "collateral" in self.file_path.stem.lower():
                         filtered_row = self.update_collateral_dict(filtered_row)
-                    if "Info" in self.file_path.stem:
+                    if "info" in self.file_path.stem.lower():
                         filtered_row = self.update_info_dict(filtered_row)
                     writer.writerow(filtered_row)
             self.logger.info(f"CSV file has been written to {self.file_path}")
