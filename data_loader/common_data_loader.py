@@ -79,6 +79,8 @@ class CommonDataLoader:
             row_data["FICO_SCORE_KEY"] = 8
         elif split_use_case[-2] == "None" and split_use_case[-1] != "None":
             row_data["FICO_SCORE_KEY"] = 0
+        else:
+            row_data["FICO_SCORE_KEY"] = 0
 
         if "PaidAuto" in row_data["USE_CASE"]:
             row_data["PRIOR_AUTO_KEY"] = 3
