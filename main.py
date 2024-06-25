@@ -17,21 +17,21 @@ def merge_csv_file_to_one():
     config: dict = PathUtils().get_configuration()
     config_data: dict = config["INFO_INPUT"]
 
-    csv_files_path = "/Users/nikhil/Documents/Leapfrog/los-test/temp/csv_files/*.csv"
+    csv_files_path = PathUtils.get_temp_folder().joinpath("csv_files/*.csv")
     today_date = datetime.now().strftime("%Y%m%d_%H%M%S%f")
     output_file_name = f"{config_data['REGISTRATION_STATE']}_{config_data['APPLICATION_TIN_TYPE']}_{today_date}.xlsx".replace(
         " ", "_"
     ).lower()
     output_excel_file = PathUtils().get_temp_folder().joinpath(output_file_name)
 
-    csv_files = glob.glob(csv_files_path)
+    csv_files = [path.replace("\\", "/") for path in (glob.glob(str(csv_files_path)))]
 
     with pd.ExcelWriter(output_excel_file, engine="openpyxl") as writer:
         for csv_file in csv_files:
             sheet_name = csv_file.split("/")[-1].split(".")[0]
             df = pd.read_csv(csv_file)
             df.rename(columns=lambda x: " " if "Unnamed" in x else x, inplace=True)
-            df.iloc[1:].fillna("NA", inplace=True)
+            df.loc[1:, :] = df.loc[1:, :].fillna("NA")
             df.to_excel(writer, sheet_name=sheet_name, index=False)
 
 
