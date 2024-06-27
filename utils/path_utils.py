@@ -50,3 +50,7 @@ class PathUtils:
     @classmethod
     def get_temp_folder(cls) -> Path:
         return cls().__base_path.joinpath("temp")
+
+    @classmethod
+    def get_output_folder(cls) -> Path:
+        return cls().__base_path.joinpath("temp/output_files")

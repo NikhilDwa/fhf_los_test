@@ -2,7 +2,6 @@ import csv
 import random
 
 from utils.logger_utils import Logger
-from utils.path_utils import PathUtils
 
 
 class CommonDataLoader:
@@ -15,6 +14,7 @@ class CommonDataLoader:
         self.start_id = None
         self.config_data = None
         self.count = 0
+        self.entire_column = None
 
     def write_header_to_file(self):
         self.logger.info(f"inside write_header_to_file method..........")
@@ -51,12 +51,11 @@ class CommonDataLoader:
 
     def update_info_dict(self, row_data):
         self.logger.info(f"inside update_info_dict method..........row_data")
-        config = PathUtils().get_configuration()
         increment_fields = {
-            "APPLICANT": config["APPLICANT_INPUT"]["start_id"],
-            "COLLATERAL": config["COLLATERAL_INPUT"]["start_id"],
-            "INFO": config["INFO_INPUT"]["start_id"],
-            "STRUCTURE": config["STRUCTURE_INPUT"]["start_id"],
+            "APPLICANT": self.entire_column.APPLICANT_INPUT["start_id"],
+            "COLLATERAL": self.entire_column.COLLATERAL_INPUT["start_id"],
+            "INFO": self.entire_column.INFO_INPUT["start_id"],
+            "STRUCTURE": self.entire_column.STRUCTURE_INPUT["start_id"],
         }
 
         for field, start_id in increment_fields.items():
@@ -98,6 +97,7 @@ class CommonDataLoader:
     def write_to_csv(self):
         self.logger.info(f"inside write_to_csv method..........")
         try:
+            # breakpoint()
             with open(self.file_path, mode="a", newline="") as file:
                 fieldnames = [field for field in self.column_name if field != "JSON"]
                 if "ID" not in fieldnames:
@@ -128,8 +128,8 @@ class CommonDataLoader:
                         filtered_row = self.update_info_dict(filtered_row)
                     writer.writerow(filtered_row)
             self.logger.info(f"CSV file has been written to {self.file_path}")
-        except Exception as e:
-            self.logger.error(f"Failed to write CSV file: {e}")
+        except Exception:
+            self.logger.error(f"Failed to write CSV file")
 
     def execute_data_loading(self):
         self.logger.info(f"inside execute_data_loading method..........")
