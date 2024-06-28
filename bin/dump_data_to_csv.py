@@ -25,9 +25,14 @@ class DumpDataToCsv:
         self.logger.info(
             f"Inside get_file_with_string method..........search_string: {search_string}."
         )
+        # Normalize the search string to lowercase
+        search_string_lower = search_string.lower()
+
         folder = PathUtils.get_temp_folder()
-        pattern = f"*{search_string}*"
-        matching_files = [path for path in folder.glob(pattern) if path.is_file()]
+        matching_files = [
+            path for path in folder.glob("*")
+            if path.is_file() and search_string_lower in path.name.lower()
+        ]
         if matching_files:
             self.logger.info(f"File found: {matching_files[0]}")
             return matching_files[0]

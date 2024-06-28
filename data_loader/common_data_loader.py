@@ -1,3 +1,4 @@
+import re
 import csv
 import random
 
@@ -64,22 +65,29 @@ class CommonDataLoader:
         self.count += 1
         row_data["TEST_NAME"] = row_data["USE_CASE"]
         split_use_case = row_data["USE_CASE"].split("_")
-        if "700" in row_data["USE_CASE"]:
-            row_data["FICO_SCORE_KEY"] = 1
-        elif "600" in split_use_case:
-            row_data["FICO_SCORE_KEY"] = 2
-        elif "<550" in split_use_case:
-            row_data["FICO_SCORE_KEY"] = 7
-        elif "<600" in split_use_case:
-            row_data["FICO_SCORE_KEY"] = 6
-        elif "550-600" in row_data["USE_CASE"]:
-            row_data["FICO_SCORE_KEY"] = 6
-        elif split_use_case[-1] == "None":
-            row_data["FICO_SCORE_KEY"] = 8
-        elif split_use_case[-2] == "None" and split_use_case[-1] != "None":
-            row_data["FICO_SCORE_KEY"] = 0
+        if "core" in self.entire_column.__file__:
+            if "700" in row_data["USE_CASE"]:
+                row_data["FICO_SCORE_KEY"] = 1
+            elif "600" in split_use_case:
+                row_data["FICO_SCORE_KEY"] = 2
+            elif "<550" in split_use_case:
+                row_data["FICO_SCORE_KEY"] = 7
+            elif "<600" in split_use_case:
+                row_data["FICO_SCORE_KEY"] = 6
+            elif "550-600" in row_data["USE_CASE"]:
+                row_data["FICO_SCORE_KEY"] = 6
+            elif split_use_case[-1] == "None":
+                row_data["FICO_SCORE_KEY"] = 8
+            elif split_use_case[-2] == "None" and split_use_case[-1] != "None":
+                row_data["FICO_SCORE_KEY"] = 0
+            else:
+                row_data["FICO_SCORE_KEY"] = 0
         else:
-            row_data["FICO_SCORE_KEY"] = 0
+            if "700" in row_data["USE_CASE"]:
+                row_data["FICO_SCORE_KEY"] = 99
+            else:
+                row_data["FICO_SCORE_KEY"] = 0
+
 
         if "PaidAuto" in row_data["USE_CASE"]:
             row_data["PRIOR_AUTO_KEY"] = 3
@@ -92,7 +100,20 @@ class CommonDataLoader:
             row_data["GOOD_CREDIT_CUSTOMER"] = "Short Term Bureau"
         else:
             row_data["GOOD_CREDIT_CUSTOMER"] = "NA"
+
+        if "PTier" or "RTier" in row_data["USE_CASE"]:
+            ptier_match = re.search(r'PTier(\d+)', row_data["USE_CASE"])
+            if ptier_match:
+                row_data["PRICING_TIER"] = ptier_match.group(1)
+
+            rtier_match = re.search(r'RTier(\d+)', row_data["USE_CASE"])
+            if rtier_match:
+                row_data["RISK_TIER"] = rtier_match.group(1)
+
         return row_data
+
+
+
 
     def write_to_csv(self):
         self.logger.info(f"inside write_to_csv method..........")

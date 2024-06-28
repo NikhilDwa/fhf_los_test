@@ -18,7 +18,7 @@ def main():
                 dump_data_to_csv.merge_csv_file_to_one(output_file_path)
                 print("CSV files merged successfully.")
             else:
-                print("No file found with 'core' in the name.")
+                print("No file found with 'aspire' in the name.")
         except Exception as e:
             print(f"An error occurred: {e}")
     elif user_input == "n":
