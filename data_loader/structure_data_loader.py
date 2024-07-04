@@ -1,6 +1,6 @@
 from utils.logger_utils import Logger
 from utils.path_utils import PathUtils
-from common.csv_file_constants import structure_column_name
+from common.file_headers import structure_column_name
 from data_loader.common_data_loader import CommonDataLoader
 
 

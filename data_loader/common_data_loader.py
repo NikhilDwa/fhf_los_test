@@ -63,7 +63,7 @@ class CommonDataLoader:
             row_data[field] = start_id + self.count
 
         self.count += 1
-        row_data["TEST_NAME"] = row_data["USE_CASE"]
+        row_data["TEST_CASE"] = row_data["USE_CASE"]
         split_use_case = row_data["USE_CASE"].split("_")
         if "core" in self.entire_column.__file__:
             if "700" in row_data["USE_CASE"]:
@@ -84,10 +84,9 @@ class CommonDataLoader:
                 row_data["FICO_SCORE_KEY"] = 0
         else:
             if "700" in row_data["USE_CASE"]:
-                row_data["FICO_SCORE_KEY"] = 99
+                row_data["FICO_SCORE_KEY"] = 1
             else:
                 row_data["FICO_SCORE_KEY"] = 0
-
 
         if "PaidAuto" in row_data["USE_CASE"]:
             row_data["PRIOR_AUTO_KEY"] = 3
@@ -102,18 +101,15 @@ class CommonDataLoader:
             row_data["GOOD_CREDIT_CUSTOMER"] = "NA"
 
         if "PTier" or "RTier" in row_data["USE_CASE"]:
-            ptier_match = re.search(r'PTier(\d+)', row_data["USE_CASE"])
+            ptier_match = re.search(r"PTier(\d+)", row_data["USE_CASE"])
             if ptier_match:
                 row_data["PRICING_TIER"] = ptier_match.group(1)
 
-            rtier_match = re.search(r'RTier(\d+)', row_data["USE_CASE"])
+            rtier_match = re.search(r"RTier(\d+)", row_data["USE_CASE"])
             if rtier_match:
                 row_data["RISK_TIER"] = rtier_match.group(1)
 
         return row_data
-
-
-
 
     def write_to_csv(self):
         self.logger.info(f"inside write_to_csv method..........")

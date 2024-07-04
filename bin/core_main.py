@@ -1,14 +1,15 @@
 from pathlib import Path
 from common import core_constants
-from bin.dump_data_to_csv import DumpDataToCsv
+from utils.string_utils import StringUtils
+from services.dump_data_to_csv_service import DumpDataToCsv
 
 
 def main():
-    dump_data_to_csv = DumpDataToCsv(core_constants)
+    dump_data_to_csv = DumpDataToCsv(los_constants=core_constants)
     user_input = input("Have you updated the core constants? (Y/N)").strip().lower()
     if user_input == "y":
         try:
-            file_path = dump_data_to_csv.get_file_with_string("core")
+            file_path = StringUtils().get_file_with_string("core")
             if file_path:
                 dump_data_to_csv.get_data_load_csv(file_path)
                 core_info_data = core_constants.INFO_INPUT

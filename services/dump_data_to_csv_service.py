@@ -16,29 +16,10 @@ from data_loader import (
 
 
 class DumpDataToCsv:
-    def __init__(self, los_constants):
+    def __init__(self, los_constants=None):
         log_namespace = self.__class__.__name__
         self.logger = Logger(log_namespace, f"{log_namespace}.log").get()
         self.los_constants = los_constants
-
-    def get_file_with_string(self, search_string: str) -> Path | None:
-        self.logger.info(
-            f"Inside get_file_with_string method..........search_string: {search_string}."
-        )
-        # Normalize the search string to lowercase
-        search_string_lower = search_string.lower()
-
-        folder = PathUtils.get_temp_folder()
-        matching_files = [
-            path for path in folder.glob("*")
-            if path.is_file() and search_string_lower in path.name.lower()
-        ]
-        if matching_files:
-            self.logger.info(f"File found: {matching_files[0]}")
-            return matching_files[0]
-        else:
-            self.logger.info(f"No matching file found for search string: {search_string}")
-            return None
 
     def get_data_load_csv(self, file_path: Path) -> None:
         self.logger.info(f"Inside get_data_load_csv method..........file_path: {file_path}.")

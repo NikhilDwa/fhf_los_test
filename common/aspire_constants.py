@@ -13,11 +13,7 @@ APPLICANT_INPUT = {
     "STREET_NAME": "Baker Street, Bee Street, Bamboo Drive",  # Separated by a comma, one of the random values will be inserted.
 }
 
-COLLATERAL_INPUT = {
-    "start_id": 1,
-    "VERSION": 1,
-    "DESCRIPTION": "Acceptance test"
-}
+COLLATERAL_INPUT = {"start_id": 1, "VERSION": 1, "DESCRIPTION": "Acceptance test"}
 
 INFO_INPUT = {
     "start_id": 1,
