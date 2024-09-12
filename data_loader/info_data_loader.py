@@ -1,3 +1,4 @@
+from common.constants import INFO
 from utils.logger_utils import Logger
 from utils.path_utils import PathUtils
 from common.file_headers import info_column_name
@@ -13,6 +14,6 @@ class InfoDataLoader(CommonDataLoader):
         self.start_id = self.config_data["start_id"]
 
         self.column_name = info_column_name
-        self.file_path = PathUtils().get_csv_file_path(f"Info.csv")
+        self.file_path = PathUtils().get_csv_file_path(INFO)
         self.csv_data = csv_data
         self.entire_column = input_constants

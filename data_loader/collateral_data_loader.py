@@ -1,5 +1,6 @@
 from utils.logger_utils import Logger
 from utils.path_utils import PathUtils
+from common.constants import COLLATERAL
 from common.file_headers import collateral_column_name
 from data_loader.common_data_loader import CommonDataLoader
 
@@ -13,5 +14,5 @@ class CollateralDataLoader(CommonDataLoader):
         self.start_id = self.config_data["start_id"]
 
         self.column_name = collateral_column_name
-        self.file_path = PathUtils().get_csv_file_path(f"Collateral.csv")
+        self.file_path = PathUtils().get_csv_file_path(COLLATERAL)
         self.csv_data = csv_data
