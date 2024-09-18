@@ -4,6 +4,8 @@ from datetime import datetime
 
 import pandas as pd
 
+from common.core_constants import INFO_INPUT
+from services.core_result_service import RunCoreLogic
 from utils.logger_utils import Logger
 from utils.path_utils import PathUtils
 from data_extractor.los_data_extracter import LosDataExtractor
@@ -12,6 +14,7 @@ from data_loader import (
     collateral_data_loader,
     info_data_loader,
     structure_data_loader,
+    result_data_loader
 )
 
 
@@ -37,6 +40,11 @@ class DumpDataToCsv:
             ).execute_data_loading()
             structure_data_loader.StructureDataLoader(
                 all_csv_data, self.los_constants
+            ).execute_data_loading()
+
+            core_result = RunCoreLogic(INFO_INPUT["start_id"])
+            result_data_loader.ResultDataLoader(
+                core_result, self.los_constants
             ).execute_data_loading()
 
         except Exception:

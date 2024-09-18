@@ -22,13 +22,16 @@ class CommonDataLoader:
         try:
             with open(self.file_path, "w", newline="") as file:
                 writer = csv.writer(file)
-                json_index = self.column_name.index("JSON")
-                first_row = self.column_name[: json_index + 1] + [""] * (
-                    len(self.column_name) - json_index - 2
-                )
-                writer.writerow(first_row)
-                second_row = [""] * json_index + self.column_name[json_index + 1 :]
-                writer.writerow(second_row)
+                if("JSON" in self.column_name):
+                    json_index = self.column_name.index("JSON")
+                    first_row = self.column_name[: json_index + 1] + [""] * (
+                        len(self.column_name) - json_index - 2
+                    )
+                    writer.writerow(first_row)
+                    second_row = [""] * json_index + self.column_name[json_index + 1 :]
+                    writer.writerow(second_row)
+                else:
+                    writer.writerow(self.column_name)
             self.logger.info(f"Header written to file: {self.file_path}")
         except Exception as e:
             self.logger.exception(f"Failed to write CSV file: {e}")
