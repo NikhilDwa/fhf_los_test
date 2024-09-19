@@ -22,7 +22,7 @@ aspire_acceptance_input = {
     "MODEL": "CR-V, Odyssey",
     "REGION": "EASTERN",
     "VALUE_SOURCE": "Manual Other",
-    "VEHICLE_CONDITION": "New",
+    "VEHICLE_CONDITION": "New, Used",
     "VEHICLE_YEAR": "2025",
     "VIN": "19ude4h37ra013135, 5J6RE487X9L059421, 5FNRL6H75LB073406",
     "SSN": "666140220, 666010068, 666670630",

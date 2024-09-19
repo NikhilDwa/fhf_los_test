@@ -14,7 +14,7 @@ from data_loader import (
     collateral_data_loader,
     info_data_loader,
     structure_data_loader,
-    result_data_loader
+    result_data_loader,
 )
 
 

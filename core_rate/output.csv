@@ -1,0 +1,13 @@
+INFO_ID,USE_CASE,RATE
+,SC_SSN_LTV3_0-20_None_None,{interest_rate: 19.9}
+,SC_SSN_LTV3_0-20_None_<600,{interest_rate: 17.9}
+,SC_SSN_LTV3_0-20_None_PaidAuto,{interest_rate: 17.4}
+,SC_SSN_LTV3_20.01-30_SedanMileage_<600,{interest_rate: 20.4}
+,SC_SSN_LTV3_70.01-80_SedanMileage_A_700LTB,{interest_rate: 19.4}
+,SC_SSN_LTV3_0-20_TruckMileage_PaidAuto_600,{interest_rate: 17.4}
+,SC_SSN_LTV3_20.01-30_TruckMileage_B_700_PaidAuto,{interest_rate: 12.4}
+,SC_SSN_LTV3_40.01-50_TruckMileage_AB_700LTB_PaidAuto,{interest_rate: 13.9}
+,SC_SSN_LTV3_>80.01_Luxury_B_700_PaidAuto,{interest_rate: 20.4}
+,SC_SSN_LTV3_20_Luxury&Mileage_AB_700LTB_PaidAuto,{interest_rate: 17.4}
+,SC_SSN_LTV3_20.01-30_None_None,{interest_rate: 17.4}
+,SC_SSN_LTV3_20.01-30_None_<600,{interest_rate: 15.9}

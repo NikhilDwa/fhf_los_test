@@ -55,11 +55,7 @@ applicant_column_name = [
     "STREET_NAME",
 ]
 
-result_column_name = [
-    "ID",
-    "USE_CASE",
-    "RESULT"
-]
+result_column_name = ["ID", "USE_CASE", "RESULT"]
 
 collateral_column_name = [
     "ID",

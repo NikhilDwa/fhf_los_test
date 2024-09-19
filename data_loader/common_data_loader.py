@@ -22,7 +22,7 @@ class CommonDataLoader:
         try:
             with open(self.file_path, "w", newline="") as file:
                 writer = csv.writer(file)
-                if("JSON" in self.column_name):
+                if "JSON" in self.column_name:
                     json_index = self.column_name.index("JSON")
                     first_row = self.column_name[: json_index + 1] + [""] * (
                         len(self.column_name) - json_index - 2

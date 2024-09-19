@@ -96,7 +96,7 @@ class LosDataExtractor:
         """
         self.logger.info(f"inside get_csv_file_content method..........file_path: {file_path}")
         try:
-            with open(file_path,"r", newline="") as los_file:
+            with open(file_path, "r", newline="") as los_file:
                 csv_reader = csv.DictReader(los_file)
                 return [dict(row) for row in csv_reader]
         except Exception:
