@@ -2,7 +2,7 @@ import csv
 
 from core_rate import core_constants as c
 
-file_path = "/Users/nikhil/Documents/Leapfrog/new/fhf_los_test/core_rate/core_rate.csv"
+file_path = "C:/Users/Leapfrog/fhf_los_test/core_rate/FLCL2CL3ITINPV.csv"
 
 with open(file_path, "r", newline="") as los_file:
     csv_reader = csv.DictReader(los_file)
@@ -11,53 +11,99 @@ with open(file_path, "r", newline="") as los_file:
 
 final_interest = []
 for d in csv_data:
+
     split_use_case = d["TESTCASE"].split("_")
+
     final_rate = c.base_rate[split_use_case[0]]
-    state_usury_max_rate = c.state_usury_max_rate[split_use_case[0]]
-
+    #print(split_use_case)
+    # if(d["TESTCASE"] =="SC_ITIN_LTV3_0-20_None_600"):
+    #     breakpoint()
+    state_usury_max_rate = c.state_usury_max_rate[split_use_case[0]] #state_usaury
     # For rate calculation
-    dimension_rate = c.dimension_rate_adjustment
 
-    if "None_None" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["None_None"]
-    if "AB_700LTB_PaidAuto" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["AB_700LTB_PaidAuto"]
-    if "B_700_PaidAuto" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["B_700_PaidAuto"]
-    if "A_700LTB" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["A_700LTB"]
-    if "C_700STB" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["C_700STB"]
-    if "D_700" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["D_700"]
-    if "Mileage" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["Mileage"]
-    if "Luxury" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["Luxury"]
-    if "<600" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["<600"]
-    if "<500" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["<500"]
-    if "PaidAuto_600" in d["TESTCASE"]:
-        final_rate = final_rate + dimension_rate["PaidAuto_600"]
-    if "66" in d["Term"]:
-        final_rate = final_rate + dimension_rate["66"]
-    if "72" in d["Term"]:
-        final_rate = final_rate + dimension_rate["72"]
+    split_loan_program_id = d["LOAN_PROGRAM_ID"].split("_")
+    if split_loan_program_id[-1] == "039":
+        dimension_rateCA = c.dimension_rate_adjustmentCA["039"]
+    elif split_loan_program_id[-1] == "040":
+        dimension_rateCA = c.dimension_rate_adjustmentCA["040"]
+
+    # dimension_rateCA = c.dimension_rate_adjustmentCA
+    # Logic for using either dimension_rate or dimension_rate2
+
+    if "CA" in split_use_case[0]:
+        if split_use_case[-1] == "None":
+            final_rate = final_rate + dimension_rateCA["None_None"]
+        if "AB_700LTB" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["AB_700LTB"]
+        if "_B_700" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["B_700"]
+        if "A_700LTB" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["A_700LTB"]
+        if "C_700STB" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["C_700STB"]
+        if "D_700" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["D_700"]
+        if "Mileage" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["Mileage"]
+        if "Luxury" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["Luxury"]
+        if "<600" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["<600"]
+        if "_600" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["600"]
+        if "<550" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["<550"]
+        if "PaidAuto" in d["TESTCASE"]:
+            final_rate = final_rate + dimension_rateCA["PaidAuto"]
+        if "66" in d["Term"]:
+            final_rate = final_rate + dimension_rateCA["66"]
+        if "72" in d["Term"]:
+            final_rate = final_rate + dimension_rateCA["72"]
+
+    else:
+            if split_use_case[-1] == "None":
+                final_rate = final_rate + dimension_rate["None_None"]
+            if "AB_700LTB" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["AB_700LTB"]
+            if "_B_700" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["B_700"]
+            if "A_700LTB" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["A_700LTB"]
+            if "C_700STB" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["C_700STB"]
+            if "D_700" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["D_700"]
+            if "Mileage" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["Mileage"]
+            if "Luxury" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["Luxury"]
+            if "<600" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["<600"]
+            if "_600" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["600"]
+            if "<550" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["<550"]
+            if "PaidAuto" in d["TESTCASE"]:
+                final_rate = final_rate + dimension_rate["PaidAuto"]
+            if "66" in d["Term"]:
+                final_rate = final_rate + dimension_rate["66"]
+            if "72" in d["Term"]:
+                final_rate = final_rate + dimension_rate["72"]
 
     second_rate = {}
-    if "FL" in d["TESTCASE"][0]:
+    if "FL" in split_use_case[0]:
         second_rate = c.fl_num_rate
     else:
         second_rate = c.num_rate
+
     if "SSN" in d["TESTCASE"]:
         second_rate = second_rate["SSN"]
-    if "ITIN" in d["TESTCASE"]:
+    if "_ITIN_" in d["TESTCASE"]:
         second_rate = second_rate["ITIN"]
-    if "NOITIN" in d["TESTCASE"]:
+    if "_NoITIN_" in d["TESTCASE"]:
         second_rate = second_rate["NoITIN"]
 
-    if "None_None" in d["TESTCASE"]:
+    if split_use_case[-1] == "None":
         final_rate = final_rate + second_rate["None_None"]
     if "<600" in d["TESTCASE"]:
         final_rate = final_rate + second_rate["<600"]
@@ -65,7 +111,7 @@ for d in csv_data:
         final_rate = final_rate + second_rate["PaidAuto"]
     if "700+" in d["TESTCASE"]:
         final_rate = final_rate + second_rate["700+"]
-    if "600" in d["TESTCASE"]:
+    if "_600" in d["TESTCASE"]:
         final_rate = final_rate + second_rate["600"]
     if "Mileage" in d["TESTCASE"]:
         final_rate = final_rate + second_rate["Mileage"]
@@ -79,22 +125,32 @@ for d in csv_data:
         final_rate = final_rate + second_rate["B"]
     if "_C_" in d["TESTCASE"]:
         final_rate = final_rate + second_rate["C"]
-    if "_C_" in d["TESTCASE"]:
+    if "_D_" in d["TESTCASE"]:
         final_rate = final_rate + second_rate["D"]
+    if "<550" in d["TESTCASE"]:
+        final_rate = final_rate + second_rate["<550"]
     if "66" in d["Term"]:
         final_rate = final_rate + second_rate["66"]
-    if "72" in d["Term"]:
+    if "72" in d["Term"] and "_ITIN_" in d["TESTCASE"] and "_600" in d["TESTCASE"] and "PaidAuto" in d["TESTCASE"]:
+        final_rate = final_rate + second_rate["72"]
+    elif "72" in d["Term"] and "_ITIN_" in d["TESTCASE"] and "_700" in d["TESTCASE"]:
+        final_rate = final_rate + second_rate["72"]
+    elif "72" in d["Term"] and "_ITIN_" in d["TESTCASE"]:
+        final_rate = final_rate + second_rate["72itin"]
+    elif "72" in d["Term"]:
         final_rate = final_rate + second_rate["72"]
 
-    if d["Vehicle_Type"] == "New" and int(d["Milage"]) < 5000 and 2025 - int(d["Age"]) <= 1:
+
+
+
+
+    if int(d["Milage"]) < 5000 and 2025 - int(d["Age"]) <= 2:
         final_rate = final_rate + second_rate["new_<2yr_<5000miles"]
 
     # Rate reduction
     rate_reduction = c.rate_reduction
     if "0-20" in d["TESTCASE"]:
         final_rate = final_rate - rate_reduction["0-20"]
-    elif "20" in d["TESTCASE"]:
-        final_rate = final_rate - rate_reduction["20"]
     if "20.01-30" in d["TESTCASE"]:
         final_rate = final_rate - rate_reduction["20.01-30"]
     if "30.01-40" in d["TESTCASE"]:
@@ -107,16 +163,23 @@ for d in csv_data:
         final_rate = final_rate - rate_reduction["60.01-70"]
     if "70.01-80" in d["TESTCASE"]:
         final_rate = final_rate - rate_reduction["70.01-80"]
+    if "_20_" in d["TESTCASE"]:
+        final_rate = final_rate - rate_reduction["0-20"]
 
     final_rate = max(final_rate, c.min_rate)
-    final_rate = min(final_rate, c.max_rate)
+    if split_loan_program_id[-1] == "039":
+        max_rate = c.max_rate_1
+    elif split_loan_program_id[-1] == "040":
+        max_rate = c.max_rate_2
+    final_rate = min(final_rate, max_rate)
+    #final_rate = min(final_rate, dimension_rateCA["max_rate"])
     final_rate = min(final_rate, state_usury_max_rate)
-    final_rate = rounded_value = round(final_rate, 2)
+    final_rate = round(final_rate, 2)
     final_interest.append(
         {
             "INFO_ID": "",
             "USE_CASE": d["TESTCASE"],
-            "RATE": "{interest_rate: " + str(final_rate) + "}",
+            "RATE": "{'interest_rate': " + str(final_rate) + "}",
         }
     )
 

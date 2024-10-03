@@ -96,11 +96,16 @@ def RunCoreLogic(id):
         if testdata["term"] == 66 or testdata["term"] == 72:
             rate = rate + rates[testdata["term"]]
 
+<<<<<<< Updated upstream
         if (
             testdata["vectype"] == "New"
             and testdata["milage"] < "5000"
             and (testdata["age"] == "2024" or testdata["age"] == "2025")
         ):
+=======
+        if (testdata["vectype"] == "New" and testdata["mileage"] < "5000" and (
+                testdata["age"] == "2024" or testdata["age"] == "2025")):
+>>>>>>> Stashed changes
             rate = rate + rates["new"]
 
         ra = ltb_rate_reduction[testdata["range"]]

@@ -1,5 +1,5 @@
 # Separated by a comma, one of the random values will be inserted.
-aspire_acceptance_input = {
+core_acceptance_input = {
     "TOTAL_CASH_PRICE": [10000, 50000],
     "TITLE_PREP_FEE": "200",
     "REG_FEE": "100",
@@ -22,11 +22,9 @@ aspire_acceptance_input = {
     "MODEL": "CR-V, Odyssey",
     "REGION": "EASTERN",
     "VALUE_SOURCE": "Manual Other",
-    "VEHICLE_CONDITION": "New, Used",
+    "VEHICLE_CONDITION": "New,Used",
     "VEHICLE_YEAR": "2025",
     "VIN": "19ude4h37ra013135, 5J6RE487X9L059421, 5FNRL6H75LB073406",
     "SSN": "666140220, 666010068, 666670630",
     "ZIP_CODE": "70001, 70002, 70000",
 }
-
-

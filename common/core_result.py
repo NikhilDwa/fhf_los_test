@@ -92,6 +92,7 @@ flnumrate = {
 }
 
 
+
 numrate = {
     "ITIN": {
         "None": 0,
@@ -151,6 +152,7 @@ min_rate = 9.99
 max_rate = 24.99
 
 state_usary_rate = {
+<<<<<<< Updated upstream
     "SC": 99.99,
     "FLCL1": 16.78,
     "TX": 24.99,
@@ -158,6 +160,15 @@ state_usary_rate = {
     "FLCL3": 21.99,
     "FLCL4": 21.99,
     "FLCL5": 21.99,
+=======
+  "SC": 99.99,
+  "FLCL1": 16.78,
+  "TX":24.99,
+"FLCL2":17.99,
+  "FLCL3":21.99,
+  "FLCL4":21.99,
+  "FLCL5":21.99
+>>>>>>> Stashed changes
 }
 
 base_rate = {
