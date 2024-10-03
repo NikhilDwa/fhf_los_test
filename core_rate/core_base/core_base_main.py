@@ -34,16 +34,17 @@ for d in csv_data:
     max_rate = 0
     rate_reduction = 0
     if "039" in d["LOAN_PROGRAM_ID"]:
-        final_rate = c.base_rate[split_use_case[0]]["039"]
-        state_usury_max_rate = c.state_usury_max_rate[split_use_case[0]]["039"]
+        final_rate = c.base_rate["039"][split_use_case[0]]
+        state_usury_max_rate = c.state_usury_max_rate["039"][split_use_case[0]]
         min_rate = c.min_rate["039"]
         max_rate = c.max_rate["039"]
         dimension_rate = dimension_rate["039"]
         num_rate_data = num_rate_data["039"]
         rate_reduction = c.rate_reduction["039"]
+
     elif "040" in d["LOAN_PROGRAM_ID"]:
-        final_rate = c.base_rate[split_use_case[0]]["040"]
-        state_usury_max_rate = c.state_usury_max_rate[split_use_case[0]]["040"]
+        final_rate = c.base_rate["040"][split_use_case[0]]
+        state_usury_max_rate = c.state_usury_max_rate["040"][split_use_case[0]]
         min_rate = c.min_rate["040"]
         max_rate = c.max_rate["040"]
         dimension_rate = dimension_rate["040"]
