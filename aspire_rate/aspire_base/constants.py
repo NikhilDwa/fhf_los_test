@@ -289,6 +289,7 @@ state_usury_max_rate = {
         "FLCL5": 20.9,
         "CA": 20.9,
         "KY": 20.9,
+        "NY": 24.9,
     },
     "040": {
         "SC": 20.9,
@@ -302,4 +303,3 @@ state_usury_max_rate = {
         "KY": 20.9,
     },
 }
-
