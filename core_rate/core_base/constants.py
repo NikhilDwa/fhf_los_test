@@ -7,7 +7,7 @@ base_rate = {
         "FLCL3": 20.9,
         "FLCL4": 20.9,
         "FLCL5": 20.9,
-        "CA": 20.9,
+        "CA": 21.99,
     },
     "040": {
         "SC": 20.9,
@@ -17,7 +17,7 @@ base_rate = {
         "FLCL3": 20.9,
         "FLCL4": 20.9,
         "FLCL5": 20.9,
-        "CA": 20.9,
+        "CA": 21.99,
     },
 }
 
@@ -30,28 +30,28 @@ state_usury_max_rate = {
         "FLCL3": 20.9,
         "FLCL4": 20.9,
         "FLCL5": 20.9,
-        "CA": 20.9,
+        "CA": 99.9,
     },
     "040": {
-        "SC": 20.9,
+        "SC": 23.9,
         "TX": 20.9,
         "FLCL1": 20.9,
         "FLCL2": 20.9,
         "FLCL3": 20.9,
         "FLCL4": 20.9,
         "FLCL5": 20.9,
-        "CA": 20.9,
+        "CA": 99.9,
     },
 }
 
-min_rate = {"039": 23.9, "040": 23.9}
+min_rate = {"039": 9.99, "040": 9.99}
 
-max_rate = {"039": 23.9, "040": 23.9}
+max_rate = {"039": 24.99, "040": 25.49}
 
 dimension_rate_adjustment = {
     "Normal": {
         "039": {
-            "None_None": 0,
+             "None_None": 0,
             "PaidAuto": -3,
             "AB_700LTB": -5,
             "B_700": -3,
@@ -65,7 +65,7 @@ dimension_rate_adjustment = {
             "PaidAuto_600": -6,
             "66": 0.5,
             "72": 1.5,
-            "600": -2,
+            "600": -1,
         },
         "040": {
             "None_None": 0,
@@ -82,16 +82,16 @@ dimension_rate_adjustment = {
             "PaidAuto_600": -6,
             "66": 0.5,
             "72": 1.5,
-            "600": -4,
+            "600": -1,
         },
     },
     "CA": {
         "039": {
             "None_None": 0,
             "PaidAuto": -3,
-            "AB_700LTB": -5,
+            "AB_700LTB": -4,
             "B_700": -3,
-            "A_700LTB": -4,
+            "A_700LTB": -3,
             "C_700STB": -3,
             "D_700": -2,
             "Mileage": 1,

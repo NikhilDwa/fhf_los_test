@@ -1,8 +1,8 @@
 import csv
 
-from core_LTVDownper import coredp_constants as c
+from core_rate.core_LTV_downper import coredp_constants as c
 
-file_path = "C:/Users/Leapfrog/fhf_los_test/core_LTVDownper/core_rate.csv"
+file_path = "C:/Users/Leapfrog/fhf_los_test/core_rate/core_LTV_downper/CANoITINPV.csv"
 
 with open(file_path, "r", newline="") as los_file:
     csv_reader = csv.DictReader(los_file)
@@ -14,13 +14,22 @@ for d in csv_data:
     # print(d)
     split_use_case = d["TESTCASE"].split("_")
     # print(split_use_case)
-    # breakpoint()
 
-    final_ltvmax = c.base_rate_dp
 
-    dp_totalCashprice = c.total_Cash_Price
-    dp_adjustment = c.dp_adjustment
     # Logic for using either dimension_rate or dimension_rate2
+
+    vehicle_type = d.get("Vehicle_Type", "").lower()
+    final_ltvmax = 0
+
+    if "009" in d["LOAN_PROGRAM_ID"]:
+        final_ltvmax = c.base_rate_Line5["009"]
+        dp_totalCashprice = c.total_Cash_Price["009"]
+        dp_adjustment = c.dp_adjustment["009"]
+
+    elif "040" in d["LOAN_PROGRAM_ID"]:
+        final_ltvmax = c.base_rate_Line5["040"]
+        dp_totalCashprice = c.total_Cash_Price["040"]
+        dp_adjustment = c.dp_adjustment["040"]
 
     total_cash_price = float(d["Total_Cash_Price"])
 
@@ -47,17 +56,24 @@ for d in csv_data:
     if "PaidAuto" in d["TESTCASE"]:
         final_ltvmax = final_ltvmax + dp_adjustment["PaidAuto"]
 
+    if "700" in d["TESTCASE"]:
+        final_ltvmax = final_ltvmax + dp_adjustment["700"]
+
+    if "_600" in d["TESTCASE"]:
+        final_ltvmax = final_ltvmax + dp_adjustment["600"]
+
     # if split_use_case[0] in JBstates and vehicle_type == "new":
     #     final_ltvmax += 3
     # elif split_use_case[0] in KBstates:
     #     final_ltvmax+=3
 
+    final_ltvmax = max(final_ltvmax, 10)
     final_ltvmax = round(final_ltvmax, 2)
     final_interest.append(
         {
             "INFO_ID": "",
             "USE_CASE": d["TESTCASE"],
-            "RESULT": "{'dp': " + str(final_ltvmax) + "}",
+            "RESULT": "{'percent_down_min': " + str(final_ltvmax) + "}",
         }
     )
 

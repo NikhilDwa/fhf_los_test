@@ -3,7 +3,7 @@ from pathlib import Path
 
 from core_rate.core_base import constants as c
 
-input_file_name = "core_base_input.csv"
+input_file_name= "CAITINPV.csv"
 output_file_name = "core_base_output.csv"
 
 base_path: Path = Path(__file__).resolve().parent
@@ -36,6 +36,7 @@ for d in csv_data:
     if "039" in d["LOAN_PROGRAM_ID"]:
         final_rate = c.base_rate["039"][split_use_case[0]]
         state_usury_max_rate = c.state_usury_max_rate["039"][split_use_case[0]]
+        min_rate = c.min_rate["039"]
         min_rate = c.min_rate["039"]
         max_rate = c.max_rate["039"]
         dimension_rate = dimension_rate["039"]
