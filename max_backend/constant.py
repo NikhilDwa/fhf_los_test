@@ -1,0 +1,110 @@
+# constant.py
+
+core_max_backend_limiting_factors = {
+    "40": {
+        "vehicle_value_threshold": 22000,
+        "base_backend_franchise": 6600,
+        "base_backend_independent": 4400,
+        "for_fico_score": {
+            "true,itin,8": 0.3,
+            "true,itin,7": 0.3,
+            "true,itin,6": 0.3,
+            "true,itin,2": 0.3,
+            "true,itin,1": 0.3,
+            "true,ssn,8": 0.3,
+            "true,ssn,7": 0.3,
+            "true,ssn,6": 0.3,
+            "true,ssn,2": 0.3,
+            "true,ssn,1": 0.3,
+            "true,no itin,8": 0.3,
+            "true,no itin,7": 0.3,
+            "true,no itin,6": 0.3,
+            "true,no itin,2": 0.3,
+            "true,no itin,1": 0.3,
+            "false,itin,8": 0.2,
+            "false,itin,7": 0.2,
+            "false,itin,6": 0.2,
+            "false,itin,2": 0.2,
+            "false,itin,1": 0.2,
+            "false,ssn,8": 0.2,
+            "false,ssn,7": 0.2,
+            "false,ssn,6": 0.2,
+            "false,ssn,2": 0.2,
+            "false,ssn,1": 0.2,
+            "false,no itin,8": 0.2,
+            "false,no itin,7": 0.2,
+            "false,no itin,6": 0.2,
+            "false,no itin,2": 0.2,
+            "false,no itin,1": 0.2
+        },
+        "for_fico_700_plus_and_paid_auto": {
+            "true,itin,3": 0.3,
+            "true,ssn,3": 0.3,
+            "true,no itin,3": 0.3,
+            "false,itin,3": 0.2,
+            "false,ssn,3": 0.2,
+            "false,no itin,3": 0.2
+        },
+        "for_paid_auto": {
+            "true,itin,3": 0.3,
+            "true,ssn,3": 0.3,
+            "true,no itin,3": 0.3,
+            "false,itin,3": 0.2,
+            "false,ssn,3": 0.2,
+            "false,no itin,3": 0.2
+        }
+    },
+    "41": {
+        "vehicle_value_threshold": 22000,
+        "base_backend_franchise": 6600,
+        "base_backend_independent": 4400,
+        "for_fico_score": {
+            "true,itin,8": 0.3,
+            "true,itin,7": 0.2,
+            "true,itin,6": 0.3,
+            "true,itin,2": 0.3,
+            "true,itin,1": 0.3,
+            "true,ssn,8": 0.3,
+            "true,ssn,7": 0.1,
+            "true,ssn,6": 0.15,
+            "true,ssn,2": 0.3,
+            "true,ssn,1": 0.3,
+            "true,no itin,8": 0.3,
+            "true,no itin,7": 0.1,
+            "true,no itin,6": 0.15,
+            "true,no itin,2": 0.3,
+            "true,no itin,1": 0.3,
+            "false,itin,8": 0.2,
+            "false,itin,7": 0.2,
+            "false,itin,6": 0.2,
+            "false,itin,2": 0.2,
+            "false,itin,1": 0.2,
+            "false,ssn,8": 0.2,
+            "false,ssn,7": 0.1,
+            "false,ssn,6": 0.15,
+            "false,ssn,2": 0.2,
+            "false,ssn,1": 0.2,
+            "false,no itin,8": 0.2,
+            "false,no itin,7": 0.1,
+            "false,no itin,6": 0.15,
+            "false,no itin,2": 0.2,
+            "false,no itin,1": 0.2
+        },
+        "for_fico_700_plus_and_paid_auto": {
+            "true,itin,3": 0.3,
+            "true,ssn,3": 0.3,
+            "true,no itin,3": 0.3,
+            "false,itin,3": 0.2,
+            "false,ssn,3": 0.2,
+            "false,no itin,3": 0.2
+        },
+        "for_paid_auto": {
+            "true,itin,3": 0.3,
+            "true,ssn,3": 0.3,
+            "true,no itin,3": 0.3,
+            "false,itin,3": 0.2,
+            "false,ssn,3": 0.2,
+            "false,no itin,3": 0.2
+        }
+    }
+}
