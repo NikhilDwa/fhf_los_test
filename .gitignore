@@ -3,6 +3,7 @@ logs
 *.log
 *.log.*
 .idea
+*.csv
 .vscode
 .DS_Store
 config.yml
