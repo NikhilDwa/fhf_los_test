@@ -8,7 +8,7 @@ core_max_backend_limiting_factors = {
         "for_fico_score": {
             "true,itin,8": 0.3,
             "true,itin,7": 0.3,
-            "true,itin,6": 0.3,
+            "true,itin, 6": 0.3,
             "true,itin,2": 0.3,
             "true,itin,1": 0.3,
             "true,ssn,8": 0.3,

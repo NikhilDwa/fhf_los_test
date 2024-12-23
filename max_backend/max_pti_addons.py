@@ -1,8 +1,8 @@
 
 def calculate_max_pti_addon(interest_rate, term, combined_gmi, vehicle_af, vsi):
 
-    pti = 0.3
-    #pti_independent = 0.22
+    #pti = 0.3
+    pti = 0.22 #independent and franchise is also 0.22 when GPS is 2.0
 
     x = (1 + interest_rate) ** term
     max_amount_financed = pti * combined_gmi * (x - 1) / (interest_rate * x)

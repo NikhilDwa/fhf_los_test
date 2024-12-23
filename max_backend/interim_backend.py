@@ -17,6 +17,7 @@ def interim_max_backend(core_data, is_franchise, rate):
         if avg_tradein_value <= vehicle_value_threshold
         else base_backend + (avg_tradein_value - vehicle_value_threshold) / 10
     )
+    # interim_backend = core_max_backend_limiting_rate * avg_tradein_value
     print(f'The interim max backend is : {interim_backend}')
     return
 

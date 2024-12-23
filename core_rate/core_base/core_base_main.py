@@ -3,7 +3,7 @@ from pathlib import Path
 
 from core_rate.core_base import constants as c
 
-input_file_name= "CAITINPV.csv"
+input_file_name= "CANoITINPV.csv"
 output_file_name = "core_base_output.csv"
 
 base_path: Path = Path(__file__).resolve().parent
@@ -33,28 +33,32 @@ for d in csv_data:
     min_rate = 0
     max_rate = 0
     rate_reduction = 0
-    if "039" in d["LOAN_PROGRAM_ID"]:
-        final_rate = c.base_rate["039"][split_use_case[0]]
-        state_usury_max_rate = c.state_usury_max_rate["039"][split_use_case[0]]
-        min_rate = c.min_rate["039"]
-        min_rate = c.min_rate["039"]
-        max_rate = c.max_rate["039"]
-        dimension_rate = dimension_rate["039"]
-        num_rate_data = num_rate_data["039"]
-        rate_reduction = c.rate_reduction["039"]
+    if "041" in d["LOAN_PROGRAM_ID"]:
+        final_rate = c.base_rate["041"][split_use_case[0]]
+        state_usury_max_rate = c.state_usury_max_rate["041"][split_use_case[0]]
+        min_rate = c.min_rate["041"]
+        min_rate = c.min_rate["041"]
+        max_rate = c.max_rate["041"]
+        dimension_rate = dimension_rate["041"]
+        num_rate_data = num_rate_data["041"]
+        rate_reduction = c.rate_reduction["041"]
 
-    elif "040" in d["LOAN_PROGRAM_ID"]:
-        final_rate = c.base_rate["040"][split_use_case[0]]
-        state_usury_max_rate = c.state_usury_max_rate["040"][split_use_case[0]]
-        min_rate = c.min_rate["040"]
-        max_rate = c.max_rate["040"]
-        dimension_rate = dimension_rate["040"]
-        num_rate_data = num_rate_data["040"]
-        rate_reduction = c.rate_reduction["040"]
+    elif "042" in d["LOAN_PROGRAM_ID"]:
+        final_rate = c.base_rate["042"][split_use_case[0]]
+        state_usury_max_rate = c.state_usury_max_rate["042"][split_use_case[0]]
+        min_rate = c.min_rate["042"]
+        max_rate = c.max_rate["042"]
+        dimension_rate = dimension_rate["042"]
+        num_rate_data = num_rate_data["042"]
+        rate_reduction = c.rate_reduction["042"]
 
     # Logic for using either dimension_rate or dimension_rate2
     if split_use_case[-1] == "None":
         final_rate = final_rate + dimension_rate["None_None"]
+    # if "_AB_" in d["TESTCASE"]:
+    #     final_rate = final_rate + dimension_rate["_AB_"]
+    # if "700" in d["TESTCASE"]:
+    #     final_rate = final_rate + dimension_rate["700"]
     if "AB_700LTB" in d["TESTCASE"]:
         final_rate = final_rate + dimension_rate["AB_700LTB"]
     if "_B_700" in d["TESTCASE"]:
