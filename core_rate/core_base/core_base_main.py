@@ -1,9 +1,10 @@
 import csv
 from pathlib import Path
+import re
 
 from core_rate.core_base import constants as c
 
-input_file_name= "CANoITINPV.csv"
+input_file_name= "CA_SSN_600-700_AcceptanceTst.csv"
 output_file_name = "core_base_output.csv"
 
 base_path: Path = Path(__file__).resolve().parent
@@ -43,14 +44,14 @@ for d in csv_data:
         num_rate_data = num_rate_data["041"]
         rate_reduction = c.rate_reduction["041"]
 
-    elif "042" in d["LOAN_PROGRAM_ID"]:
-        final_rate = c.base_rate["042"][split_use_case[0]]
-        state_usury_max_rate = c.state_usury_max_rate["042"][split_use_case[0]]
-        min_rate = c.min_rate["042"]
-        max_rate = c.max_rate["042"]
-        dimension_rate = dimension_rate["042"]
-        num_rate_data = num_rate_data["042"]
-        rate_reduction = c.rate_reduction["042"]
+    elif "046" in d["LOAN_PROGRAM_ID"]:
+        final_rate = c.base_rate["046"][split_use_case[0]]
+        state_usury_max_rate = c.state_usury_max_rate["046"][split_use_case[0]]
+        min_rate = c.min_rate["046"]
+        max_rate = c.max_rate["046"]
+        dimension_rate = dimension_rate["046"]
+        num_rate_data = num_rate_data["046"]
+        rate_reduction = c.rate_reduction["046"]
 
     # Logic for using either dimension_rate or dimension_rate2
     if split_use_case[-1] == "None":
@@ -157,6 +158,71 @@ for d in csv_data:
         final_rate = final_rate - rate_reduction["70.01-80"]
     if "_20_" in d["TESTCASE"]:
         final_rate = final_rate - rate_reduction["0-20"]
+
+    # rate_adjustments = {
+    #     "LL": 0,
+    #     "LH": -1,
+    #     "HL": -1,
+    #     "HH": -3
+    # }
+    #
+    # if "_600" in d["TESTCASE"] and "ITIN" in d["TESTCASE"]:
+    #     final_rate += rate_adjustments.get(d["score_tier_600_to_700"], 0)
+
+    # if "_600" in d["TESTCASE"] and "_ITIN_" in d["TESTCASE"]:
+    #     if "LL" in d["_LL"]:
+    #         final_rate += 0
+    #     elif "LH" in d["score_tier_600_to_700"]:
+    #         final_rate -= 1
+    #     elif "HL" in d["score_tier_600_to_700"]:
+    #         final_rate -= 1
+    #     elif "HH" in d["score_tier_600_to_700"]:
+    #         final_rate -= 3
+    #
+    # if "_600" in d["TESTCASE"] and "_NOITIN_" in d["TESTCASE"]:
+    #     if "LL" in d["score_tier_600_to_700"]:
+    #         final_rate += 0
+    #     elif "LH" in d["score_tier_600_to_700"]:
+    #         final_rate -= 1
+    #     elif "HL" in d["score_tier_600_to_700"]:
+    #         final_rate -= 1
+    #     elif "HH" in d["score_tier_600_to_700"]:
+    #         final_rate -= 3
+    #
+    # if "_600" in d["TESTCASE"] and "_SSN_" in d["TESTCASE"]:
+    #     if "LL" in d["score_tier_600_to_700"]:
+    #         final_rate += 0
+    #     elif "LH" in d["score_tier_600_to_700"]:
+    #         final_rate -= 1
+    #     elif "HL" in d["score_tier_600_to_700"]:
+    #         final_rate -= 1
+    #     elif "HH" in d["score_tier_600_to_700"]:
+    #         final_rate -= 3
+
+    rate_adjustments = {
+        "ITIN": {"_LL": 0, "_LH": -1, "_HL": -1, "_HH": -3},
+        "SSN": {"_LL": 1.5, "_LH": 0, "_HL": 0, "_HH": -1},
+        "NOITIN": {"_LL": 1.5, "_LH": 0, "_HL": 0, "_HH": -1}
+    }
+
+    testcase = d["TESTCASE"]
+
+    # Determine ITIN, SSN, or NOITIN
+    if "_ITIN_" in testcase:
+        category = "ITIN"
+    elif "_SSN_" in testcase:
+        category = "SSN"
+    else:
+        category = "NOITIN"
+
+
+    match = re.search(r"_(LL|LH|HL|HH)$", testcase)
+    score_tier = match.group(0) if match else "_LL"
+
+    # Apply rate adjustment
+    final_rate += rate_adjustments[category].get(score_tier, 0)
+
+
 
     final_rate = max(final_rate, min_rate)
     final_rate = min(final_rate, max_rate)
