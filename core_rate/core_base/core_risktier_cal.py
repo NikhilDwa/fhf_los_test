@@ -115,7 +115,7 @@ for row in csv_data:
         "CustomerTier": customer_tier,
         "PaidAuto": paid_auto,
         "CustomerMergedScore": customer_merged_score,
-        "RiskTier": risk_tier
+        "RiskTier": "{'risk_tier': " + str(risk_tier) + "}",
     })
 
 # Write output CSV file
