@@ -70,7 +70,7 @@ core_max_backend_limiting_factors = {
             "true,ssn,2": 0.3,
             "true,ssn,1": 0.3,
             "true,no itin,8": 0.3,
-            "true,no itin,7": 0.1,
+            "true,noitin,7": 0.1,
             "true,no itin,6": 0.15,
             "true,no itin,2": 0.3,
             "true,no itin,1": 0.3,

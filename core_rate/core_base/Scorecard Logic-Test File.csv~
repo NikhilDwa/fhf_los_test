@@ -1,0 +1,9 @@
+TESTCASE,AverageFicoScore,CustomerTier,PaidAuto,CustomerMergedScore
+fico_merge_test_1,611,NA,0,600
+fico_merge_test_2,623,NA,0,630
+fico_merge_test_3,635,NA,0,660
+fico_merge_test_4,648,NA,0,680
+fico_merge_test_5,710,Long Term Bureau,0,578
+fico_merge_test_6,720,Long Term Bureau,0,582
+fico_merge_test_7,733,Long Term Bureau,0,624
+fico_merge_test_8,743,Long Term Bureau,0,655

@@ -3,7 +3,7 @@ import requests
 from headers import headers
 
 extended_url = "https://restinternal.firsthelpfinancial.net/restservice?https://restdev.firsthelpfinancial.com/itemization/config/EXTENDED?"
-state = "IL"
+state = "MA"
 loanProgramId="Indirect_AutoIndirect_001_000_Core_008_041"
 tci_url = "https://restinternal.firsthelpfinancial.net/restexternalportal?/v2/tci/applications"
 appid = "56672"

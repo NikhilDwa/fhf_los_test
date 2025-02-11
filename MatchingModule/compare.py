@@ -4,7 +4,16 @@ from headers import headers
 
 extened_url = "https://restinternal.firsthelpfinancial.net/restservice?https://restdev.firsthelpfinancial.com/itemization/config/EXTENDED?"
 simple_url = "https://restinternal.firsthelpfinancial.net/restservice?https://restdev.firsthelpfinancial.com/itemization/config/SIMPLE?"
-state = "IL"
+state = "MA"
+
+
+# states = [
+#     "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI",
+#     "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI",
+#     "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
+#     "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
+#     "VT", "VA", "WA", "WV", "WI", "WY"
+# ]
 loanProgramId="Indirect_AutoIndirect_001_000_Core_008_041"
 url1 = f"{extened_url}state={state}&loanProgramId={loanProgramId}"
 url2 = f"{simple_url}state={state}&loanProgramId={loanProgramId}"

@@ -1,5 +1,5 @@
 # main.py
-
+from math import floor
 from constant import core_max_backend_limiting_factors
 
 def interim_max_backend(core_data, is_franchise, rate):
@@ -12,13 +12,18 @@ def interim_max_backend(core_data, is_franchise, rate):
     vehicle_value_threshold = core_data["vehicle_value_threshold"]
 
     avg_tradein_value = float(input("Please enter average tradein value?:"))
-    interim_backend = (
-        rate * avg_tradein_value
+
+    increment_on_base_value = (
+        0
         if avg_tradein_value <= vehicle_value_threshold
-        else base_backend + (avg_tradein_value - vehicle_value_threshold) / 10
+        else (avg_tradein_value - vehicle_value_threshold) / 10
     )
-    # interim_backend = core_max_backend_limiting_rate * avg_tradein_value
-    print(f'The interim max backend is : {interim_backend}')
+    backend_based_on_vehicle_threshold = base_backend + increment_on_base_value
+    backend_based_on_rate = rate * avg_tradein_value
+
+    interim_backend  =min(backend_based_on_vehicle_threshold, backend_based_on_rate)
+    calculated_max_backend = int(floor(interim_backend / 50)) * 50
+    print(f'The interim max backend is : {calculated_max_backend}')
     return
 
 
@@ -35,6 +40,7 @@ def fico_score_paid_auto_calculation(core_data):
     paid_auto = 3 if input("Is paid auto? yes/no:").lower() == "yes" else 0
 
     key = franchise_type + "," + application_tin_type + "," + str(paid_auto)
+    print(key)
     rate = core_data['for_fico_700_plus_and_paid_auto'].get(key, 0)
     interim_max_backend(core_data, is_franchise, rate)
 
@@ -49,6 +55,7 @@ def paid_auto_calculation(core_data):
 
     application_tin_type = input("What is the ssn no? ssn/itin/no itin").lower()
     key = franchise_type + "," + application_tin_type + "," + str(paid_auto)
+    print(key)
     rate = core_data['for_paid_auto'].get(key, 0)
     interim_max_backend(core_data, is_franchise, rate)
 
@@ -62,6 +69,7 @@ def fico_score_calculation(core_data):
     application_tin_type = input("What is the ssn no? ssn/itin/no itin").lower()
     fico_score = input("What is your FICO score:").lower()
     key = franchise_type + "," + application_tin_type + "," + fico_score
+    print(key)
     rate = core_data['for_fico_score'].get(key, 0)
     interim_max_backend(core_data, is_franchise, rate)
 
