@@ -18,7 +18,7 @@ final_interest = []
 
 for d in csv_data:
     split_use_case = d["TESTCASE"].split("_")
-
+    state = split_use_case[0]
     if split_use_case[0] in c.dimension_rate_adjustment.keys():
         dimension_rate = c.dimension_rate_adjustment[split_use_case[0]]
     else:
@@ -163,52 +163,11 @@ for d in csv_data:
     if "_20_" in d["TESTCASE"]:
         final_rate = final_rate - rate_reduction["0-20"]
 
-    # rate_adjustments = {
-    #     "LL": 0,
-    #     "LH": -1,
-    #     "HL": -1,
-    #     "HH": -3
-    # }
-    #
-    # if "_600" in d["TESTCASE"] and "ITIN" in d["TESTCASE"]:
-    #     final_rate += rate_adjustments.get(d["score_tier_600_to_700"], 0)
 
-    # if "_600" in d["TESTCASE"] and "_ITIN_" in d["TESTCASE"]:
-    #     if "LL" in d["_LL"]:
-    #         final_rate += 0
-    #     elif "LH" in d["score_tier_600_to_700"]:
-    #         final_rate -= 1
-    #     elif "HL" in d["score_tier_600_to_700"]:
-    #         final_rate -= 1
-    #     elif "HH" in d["score_tier_600_to_700"]:
-    #         final_rate -= 3
-    #
-    # if "_600" in d["TESTCASE"] and "_NOITIN_" in d["TESTCASE"]:
-    #     if "LL" in d["score_tier_600_to_700"]:
-    #         final_rate += 0
-    #     elif "LH" in d["score_tier_600_to_700"]:
-    #         final_rate -= 1
-    #     elif "HL" in d["score_tier_600_to_700"]:
-    #         final_rate -= 1
-    #     elif "HH" in d["score_tier_600_to_700"]:
-    #         final_rate -= 3
-    #
-    # if "_600" in d["TESTCASE"] and "_SSN_" in d["TESTCASE"]:
-    #     if "LL" in d["score_tier_600_to_700"]:
-    #         final_rate += 0
-    #     elif "LH" in d["score_tier_600_to_700"]:
-    #         final_rate -= 1
-    #     elif "HL" in d["score_tier_600_to_700"]:
-    #         final_rate -= 1
-    #     elif "HH" in d["score_tier_600_to_700"]:
-    #         final_rate -= 3
-
-    rate_adjustments = {
-        "ITIN": {"_LL": 0, "_LH": -1, "_HL": -1, "_HH": -3},
-        "SSN": {"_LL": 1.5, "_LH": 0, "_HL": 0, "_HH": -1},
-        "NOITIN": {"_LL": 1.5, "_LH": 0, "_HL": 0, "_HH": -1}
-    }
-
+    if state in c.rate_adjustments:
+        rate_adjustments = c.rate_adjustments[state]
+    else:
+        rate_adjustments = c.rate_adjustments["Normal"]
     testcase = d["TESTCASE"]
 
     # Determine ITIN, SSN, or NOITIN
